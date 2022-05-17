@@ -18,14 +18,13 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	#print(_velocity.x)
-	#print(sign(_velocity.x))
+	
 	if not($DetectorNearBorder.is_colliding()):
 		_velocity.x = sign(_velocity.x) * -1 * speed.x
 		$AnimatedSprite.flip_h = not($AnimatedSprite.flip_h)
 		$DetectorNearBorder.position *= -1
 	
-	$Position2D.position *= sign(_velocity.x)
+	$Position2D.position.x = sign(_velocity.x) * abs($Position2D.position.x)
 	
 	_velocity.y += gravity * delta
 	

@@ -256,7 +256,7 @@ position = Vector2( 108, 542 )
 position = Vector2( 22, -333 )
 
 [node name="BombEnemy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 308, 542 )
+position = Vector2( 818, 382 )
 
 [node name="FireWorm" parent="." instance=ExtResource( 5 )]
 position = Vector2( 597, 564 )
@@ -265,7 +265,7 @@ position = Vector2( 597, 564 )
 position = Vector2( 833, 546 )
 
 [node name="Goblin" parent="." instance=ExtResource( 12 )]
-position = Vector2( 764, 378 )
+position = Vector2( 701, 381 )
 
 [node name="Map" parent="." instance=ExtResource( 13 )]
 position = Vector2( 937, 538 )

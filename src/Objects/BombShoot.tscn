@@ -89,7 +89,6 @@ disabled = true
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 15 )
 animation = "shoot"
-frame = 2
 speed_scale = 3.0
 playing = true
 
