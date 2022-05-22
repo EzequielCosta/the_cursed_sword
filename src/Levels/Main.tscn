@@ -268,6 +268,6 @@ position = Vector2( 833, 546 )
 position = Vector2( 764, 378 )
 
 [node name="Map" parent="." instance=ExtResource( 13 )]
-position = Vector2( 937, 538 )
+position = Vector2( 4151, 468 )
 
 [editable path="Player"]
