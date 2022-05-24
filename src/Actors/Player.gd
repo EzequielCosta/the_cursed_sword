@@ -9,7 +9,6 @@ const FLOOR_NORMAL: = Vector2.UP
 func _physics_process(delta: float) -> void:
 	
 	_velocity.y += gravity * delta
-	#var direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	
 		
 	if (Input.is_action_just_pressed("jump") and is_on_floor()):
@@ -24,67 +23,76 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite.flip_h = _velocity.x < 0
 		_velocity.x = -speed.x
 	elif (Input.is_action_just_pressed("attack")):
+		$SwordArea/CollisonSword.disabled = false
 		$AnimatedSprite.play("attack")
 	else:
 		_velocity.x = 0
-		#$AnimatedSprite.frame = 10
-		#$AnimatedSprite.stop()
-		
-	"""	
-	if (!Input.is_action_just_pressed("jump") and is_on_floor()):
-		$AnimatedSprite.play("run")	
-	if (!is_on_floor() and _velocity.y > 0):
-		print("ol")
-		$AnimatedSprite.play("fall")
-	"""
-		
 	
-		
-		#$AnimatedSprite.flip_h = _velocity.x < 0
-		#_velocity.x = -speed.x
-		
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
-	#move_and_slide(_velocity, FLOOR_NORMAL)
 	
-
-
+	if sign(_velocity.x) == 1:
+		$SwordArea/CollisonSword.position.x = 1 * abs($SwordArea/CollisonSword.position.x)	
+	elif sign(_velocity.x) == -1:
+		$SwordArea/CollisonSword.position.x = -1 * abs($SwordArea/CollisonSword.position.x)		
+	#$SwordArea/CollisonSword.position.x = sign(_velocity.x) * abs($SwordArea/CollisonSword.position.x)
 
 
 func _on_EnemyDetector_body_entered(body: Node) -> void:
-	#print("atingido")
-	if body.is_in_group("Enemy"):
-		print("atingido por " + body.name)
+	
+	if not(body.is_in_group("Enemy")):
+		return
+	
+	GameManager.life_player -= 1
+	if not(GameManager.life_player):
+		queue_free();
+	#f body.is_in_group("Enemy"):
+		#rint("atingido por " + body.name)
 	#$AnimatedSprite.play("hit")
+	$AnimatedSprite.modulate = "#db2c2c"
 	#set_physics_process(false)
-	#$Timer.start(1)
+	$Timer.start(1)
 	
 	#queue_free()
 
 
 func _on_Timer_timeout() -> void:
-	$AnimatedSprite.play("run")
-	set_physics_process(true)
+	$AnimatedSprite.play("idle")
+	#set_physics_process(true)
+	$AnimatedSprite.modulate = "#fff"
 	
-
-
-func _on_CollsionStomp_body_entered(body: KinematicBody2D) -> void:
-	_velocity.y -= 200
-	#body.queue_free()
-	#body.get_node("AnimatedSprite").play("hit")
-	#body.get_children("")$AnimatedSprite.play("hit")
 
 
 func _on_AnimatedSprite_animation_finished() -> void:
 	if ($AnimatedSprite.animation == "attack"):
+		$SwordArea/CollisonSword.disabled = true;
 		$AnimatedSprite.play("idle")
 		#$AnimatedSprite.animation = "run"
 		#$AnimatedSprite.frame = 0
 	elif ($AnimatedSprite.animation == "run"):
-	
+		$AnimatedSprite.play("idle")
+	elif ($AnimatedSprite.animation == "jump"):
 		$AnimatedSprite.play("idle")
 	
 
 
 func _on_CollisionEnemy_area_entered(area: Area2D) -> void:
-	print("Atingido ṕpor " + area.name)
-	#queue_free();
+	
+	"""
+	$AnimatedSprite.modulate = "#db2c2c"
+	GameManager.life_player -= 1
+	if not(GameManager.life_player):
+		queue_free();
+	$AnimatedSprite.play("hit")
+	self.modulate = "#fff";
+	set_physics_process(false)
+	$Timer.start(1)
+	"""	
+
+
+func _on_AnimatedSprite_frame_changed() -> void:
+	if ($AnimatedSprite.animation == "attack" and $AnimatedSprite.frame >= 2):
+		$SwordArea/CollisonSword.disabled = false;
+
+
+func _on_SwordArea_body_entered(body: Node) -> void:
+	body.queue_free();
