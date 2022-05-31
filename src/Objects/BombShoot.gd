@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 const SPEED = -200
 var velocity = Vector2.ZERO
@@ -21,9 +21,9 @@ func _physics_process(delta: float) -> void:
 	#velocity.x = delta * SPEED * direction
 	velocity.x =  SPEED * direction
 	velocity.y += gravity_bomb * delta
-	var collision = move_and_collide(velocity * delta)
-	if collision != null:
-		on_impact(collision.normal)
+	#var collision = move_and_collide(velocity * delta)
+	#if collision != null:
+		#on_impact(collision.normal)
 	#translate(velocity)
 	
 func on_impact(normal : Vector2):

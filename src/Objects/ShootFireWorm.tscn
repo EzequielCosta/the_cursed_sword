@@ -72,12 +72,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="ShootFireWorm" type="Area2D" groups=["Enemy"]]
+[node name="ShootFireWorm" type="Area2D" groups=["Object_Enemy"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 shape = SubResource( 15 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

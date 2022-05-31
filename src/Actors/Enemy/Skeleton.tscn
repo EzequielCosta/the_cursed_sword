@@ -24,6 +24,22 @@ region = Rect2( 300, 0, 150, 150 )
 atlas = ExtResource( 2 )
 region = Rect2( 450, 0, 150, 150 )
 
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 450, 0, 150, 150 )
+
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 150, 150 )
@@ -56,22 +72,6 @@ region = Rect2( 900, 0, 150, 150 )
 atlas = ExtResource( 1 )
 region = Rect2( 1050, 0, 150, 150 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 4 )
-region = Rect2( 450, 0, 150, 150 )
-
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
@@ -79,19 +79,19 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "death",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 21.5, 20 )
+extents = Vector2( 22, 22.5 )
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 8.5, 19.5 )
@@ -104,11 +104,6 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource( 3 )
 
-[node name="DetectorPlayer" type="RayCast2D" parent="."]
-visible = false
-position = Vector2( -60, -38 )
-enabled = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -11, 1 )
 shape = SubResource( 14 )
@@ -116,9 +111,7 @@ shape = SubResource( 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
 animation = "walk"
-frame = 3
 speed_scale = 2.0
-playing = true
 flip_h = true
 
 [node name="SwordArea2D" type="Area2D" parent="."]
@@ -128,7 +121,7 @@ priority = 1.0
 
 [node name="SwordCollisionShape2D" type="CollisionShape2D" parent="SwordArea2D"]
 modulate = Color( 0.188235, 0.0784314, 0.803922, 1 )
-position = Vector2( -50.5, -1 )
+position = Vector2( -50, -3.5 )
 shape = SubResource( 15 )
 disabled = true
 
@@ -156,5 +149,6 @@ shape = SubResource( 17 )
 [connection signal="area_entered" from="SwordArea2D" to="." method="_on_SwordArea2D_area_entered"]
 [connection signal="body_entered" from="SwordArea2D" to="." method="_on_SwordArea2D_body_entered"]
 [connection signal="area_entered" from="PlayerNearArea2D" to="." method="_on_PlayerNearArea2D_area_entered"]
+[connection signal="area_exited" from="PlayerNearArea2D" to="." method="_on_PlayerNearArea2D_area_exited"]
 [connection signal="body_entered" from="PlayerNearArea2D" to="." method="_on_PlayerNearArea2D_body_entered"]
 [connection signal="area_entered" from="AttackPlayerArea2D" to="." method="_on_AttackPlayerArea2D_area_entered"]

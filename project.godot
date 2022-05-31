@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="the_cursed_sword"
-run/main_scene="res://src/Levels/Main.tscn"
+run/main_scene="res://src/UI/GameOver.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -83,6 +83,8 @@ shoot={
 2d_physics/layer_2="word"
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="shoot"
+2d_physics/layer_5="items"
+2d_physics/layer_6="platform"
 
 [physics]
 

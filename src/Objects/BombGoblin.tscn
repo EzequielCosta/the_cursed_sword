@@ -1,10 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/Enemies/Goblin/Bomb_sprite.png" type="Texture" id=1]
 [ext_resource path="res://src/Objects/BombGoblin.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=21]
-radius = 30.0
+radius = 15.1327
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 1 )
@@ -79,7 +79,15 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="BombGoblin" type="Area2D"]
+[sub_resource type="CircleShape2D" id=37]
+radius = 43.1045
+
+[node name="BombGoblin" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 2
+mass = 195.86
+linear_velocity = Vector2( -200, 20 )
+applied_force = Vector2( -400, 0 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -87,7 +95,23 @@ position = Vector2( 5, 3 )
 shape = SubResource( 21 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 20 )
 animation = "shoot"
+frame = 3
+speed_scale = 5.0
 playing = true
+
+[node name="TimerExplode" type="Timer" parent="."]
+
+[node name="ExploseArea" type="Area2D" parent="."]
+
+[node name="ExploseAreaCollision" type="CollisionShape2D" parent="ExploseArea"]
+modulate = Color( 0.109804, 0.117647, 0.733333, 1 )
+position = Vector2( 4, 0 )
+shape = SubResource( 37 )
+disabled = true
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="TimerExplode" to="." method="_on_TimerExplode_timeout"]
+[connection signal="body_entered" from="ExploseArea" to="." method="_on_ExploseArea_body_entered"]

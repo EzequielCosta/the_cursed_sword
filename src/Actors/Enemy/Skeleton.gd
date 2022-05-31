@@ -1,29 +1,24 @@
 extends KinematicBody2D
 
-var speed: = Vector2(30.0, 0)
+var speed: = Vector2(40.0, 0)
 var _velocity = Vector2.ZERO
 const FLOOR_NORMAL: = Vector2.UP
 var gravity = 2000
+onready var player : Node2D
 
 func _ready() -> void:
 	set_physics_process(false)
 	_velocity.x = -speed.x
+	player = get_parent().get_node("Player")
+	
 	
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
-	_velocity.x *= -1 if is_on_wall() else 1	
+	player =  get_parent().get_node("Player")
+	_setDirection()
 	$AnimatedSprite.flip_h = _velocity.x < 0
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
-	"""
-	if ($DetectorPlayer.collide_with_bodies):
-		print($DetectorPlayer.get_collider())
-		print($DetectorPlayer.collide_with_bodies)
-		$AnimatedSprite.play("attack")
-		$SwordArea2D/SwordCollisionShape2D.modulate = "#fff"
-		$SwordArea2D/SwordCollisionShape2D.disabled = false
-		_velocity.x = 0
-		#set_physics_process(false);
-	"""
+	
 
 func _on_PlayerNearArea2D_body_entered(body: Node) -> void:
 	pass
@@ -41,10 +36,8 @@ func _on_PlayerNearArea2D_body_entered(body: Node) -> void:
 		
 
 func _on_SwordArea2D_body_entered(body: Node) -> void:
-	GameManager.life_player -= 1
-	if not(GameManager.life_player):
-		body.queue_free()
-	body.get_node('AnimatedSprite').modulate = "#db2c2c"
+	if (body.name == "Player"):
+		body.take_attack()
 	
 
 func _on_AnimatedSprite_animation_finished() -> void:
@@ -72,5 +65,27 @@ func _on_PlayerNearArea2D_area_entered(area: Area2D) -> void:
 
 
 func _on_AnimatedSprite_frame_changed() -> void:
-	if $AnimatedSprite.animation == "attack"  and $AnimatedSprite.frame == 6:
+	if $AnimatedSprite.animation == "attack"  and $AnimatedSprite.frame >= 6:
 		 $SwordArea2D/SwordCollisionShape2D.disabled = false
+
+
+func _on_PlayerNearArea2D_area_exited(area: Area2D) -> void:
+	if area.name == 'CollisionEnemy':
+		$AnimatedSprite.play("walk");
+		set_physics_process(true);
+		$SwordArea2D/SwordCollisionShape2D.disabled = true
+		
+func directionOfPlayer():
+	if (player != null):
+		var distance = player.global_position - global_position
+		var direction = distance.normalized()
+		return sign(distance.x)
+		
+	return 0
+
+func _setDirection () :
+	if (player != null):		
+		_velocity.x =  abs(_velocity.x) * directionOfPlayer()
+		$SwordArea2D/SwordCollisionShape2D.position.x = abs($SwordArea2D/SwordCollisionShape2D.position.x) * directionOfPlayer()
+		$PlayerNearArea2D/PlayerNearCollisionShape2D.position.x = abs($PlayerNearArea2D/PlayerNearCollisionShape2D.position.x) * directionOfPlayer()
+

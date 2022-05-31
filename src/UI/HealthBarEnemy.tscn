@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/HealthBarEnemy.gd" type="Script" id=1]
+[ext_resource path="res://assets/white.png" type="Texture" id=2]
+
+[node name="HealthBarEnemy" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_right = 298.0
+margin_bottom = 40.0
+value = 100.0
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+tint_over = Color( 0.968627, 0.960784, 0.960784, 0.196078 )
+tint_progress = Color( 0.909804, 0.0862745, 0.0862745, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

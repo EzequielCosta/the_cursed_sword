@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 
 const SPEED = -300
@@ -33,6 +33,25 @@ func calculate_arc_velocity(source_position, target_position, arc_height, gravit
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	velocity.x = delta * SPEED * direction
-	velocity.y += gravity_bomb * delta
-	translate(velocity)
+	linear_velocity.x = abs(linear_velocity.x) * direction * -1
+	#velocity.x =  SPEED * direction
+	pass
+	#linear_velocity = velocity
+	#velocity.x = delta * SPEED * direction
+	#velocity.y += gravity_bomb * delta
+	#translate(velocity)
+
+
+func _on_TimerExplode_timeout() -> void:
+	$AnimatedSprite.play("explode")
+	$ExploseArea/ExploseAreaCollision.disabled = false
+
+
+func _on_AnimatedSprite_animation_finished() -> void:
+	if ($AnimatedSprite.animation == "explode"):
+		queue_free()
+
+
+func _on_ExploseArea_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		body.take_attack()
