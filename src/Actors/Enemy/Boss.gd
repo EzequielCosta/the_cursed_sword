@@ -66,6 +66,10 @@ func _on_AnimatedSprite_animation_finished() -> void:
 		$SwordAttack3Area/SwordAttack3Collision.disabled = true
 		set_physics_process(true)
 		$AnimatedSprite.play("run")
+	elif ($AnimatedSprite.animation == "hit"):
+		$SwordAttack3Area/SwordAttack3Collision.disabled = true
+		set_physics_process(true)
+		$AnimatedSprite.play("run")
 		
 	
 	elif ($AnimatedSprite.animation == "death"):
@@ -74,7 +78,7 @@ func _on_AnimatedSprite_animation_finished() -> void:
 	elif ($AnimatedSprite.animation == "hit"):
 		$AnimatedSprite.play("idle")
 		$AnimatedSprite.frame = 2
-		$TimerHit.start(0.5)
+		#$TimerHit.start(0.5)
 		set_physics_process(false)
 		$StompArea/StompCollision.disabled = false
 		
@@ -91,6 +95,7 @@ func _on_AnimatedSprite_frame_changed() -> void:
 		$SwordAttack2Area/SwordAttack2Collision.disabled = false
 	elif ($AnimatedSprite.animation == "attack3" and $AnimatedSprite.frame == 6):
 		$SwordAttack3Area/SwordAttack3Collision.disabled = false
+		$AnimatedSprite.speed_scale = 2
 		
 
 func _on_StomArea_area_entered(area: Area2D) -> void:
@@ -112,7 +117,7 @@ func _on_NearPlayerArea_body_entered(body: Node) -> void:
 	if (body.name == 'Player'):
 		set_physics_process(false)
 		$AnimatedSprite.play("attack3")
-
+		$AnimatedSprite.speed_scale = 1
 
 func _on_StompArea_area_entered(area: Area2D) -> void:
 	if (area.name == 'SwordArea'):

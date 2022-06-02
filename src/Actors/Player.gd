@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		_velocity.x = -speed.x
 	elif (Input.is_action_just_pressed("attack")):
 		$AnimatedSprite.play("attack1")
-		$AnimatedSprite.speed_scale = 5
+		$AnimatedSprite.speed_scale = 3
 	else:
 		_velocity.x = 0
 		
@@ -110,3 +110,7 @@ func set_hp(new_value):
 	emit_signal("hp_change", new_value)
 	
 
+
+
+func _on_CollisionEnemy_area_exited(area):
+	pass # Replace with function body.

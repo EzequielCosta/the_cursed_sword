@@ -332,9 +332,6 @@ tile_data = PoolIntArray( 196603, 4, 0, 262132, 4, 0, 262138, 4, 0, 262139, 4, 0
 [node name="Player" parent="." instance=ExtResource( 9 )]
 position = Vector2( 108, 542 )
 
-[node name="AnimatedSprite" parent="Player" index="0"]
-frame = 4
-
 [node name="Camera2D" parent="Player" index="2"]
 position = Vector2( 22, -333 )
 
@@ -346,7 +343,7 @@ position = Vector2( 22, -333 )
 position = Vector2( 813, 469 )
 
 [node name="AnimatedSprite" parent="Boss" index="1"]
-frame = 4
+frame = 6
 
 [connection signal="hp_change" from="Player" to="CanvasLayer/HealthBar" method="_on_Player_hp_change"]
 
