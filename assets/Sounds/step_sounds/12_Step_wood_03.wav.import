@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/12_Step_wood_03.wav-cf39bee7a99740fdb3a1537ac01a7d27.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/step_sounds/12_Step_wood_03.wav"
+dest_files=[ "res://.import/12_Step_wood_03.wav-cf39bee7a99740fdb3a1537ac01a7d27.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

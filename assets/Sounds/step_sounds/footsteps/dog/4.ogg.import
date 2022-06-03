@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/4.ogg-ec77693f32c2c3b8c518f91fece6667b.oggstr"
+
+[deps]
+
+source_file="res://assets/Sounds/step_sounds/footsteps/dog/4.ogg"
+dest_files=[ "res://.import/4.ogg-ec77693f32c2c3b8c518f91fece6667b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

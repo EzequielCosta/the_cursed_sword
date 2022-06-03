@@ -13,7 +13,7 @@ func set_direction_shoot (dir) :
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$SoundFuseBomb.play()
 	
 
 func calculate_arc_velocity(source_position, target_position, arc_height, gravity):
@@ -44,6 +44,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_TimerExplode_timeout() -> void:
 	$AnimatedSprite.play("explode")
+	$SoundExplosion.play()
 	$ExploseArea/ExploseAreaCollision.disabled = false
 
 

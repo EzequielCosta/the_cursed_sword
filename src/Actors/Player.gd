@@ -1,12 +1,16 @@
 extends KinematicBody2D
 
+
 const max_hp = 4
 var speed: = Vector2(200.0, 700.0)
 var _velocity = Vector2(0, 0)
 var gravity = 2000
+var impulse:float = 600.0
 signal hp_change(new_value)
-
+var die = false
 const FLOOR_NORMAL: = Vector2.UP
+
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -14,10 +18,16 @@ func _physics_process(delta: float) -> void:
 	
 	_velocity.y += gravity * delta
 	
-	
 	if (Input.is_action_just_pressed("jump") and is_on_floor()):
 		$AnimatedSprite.play("jump")
 		_velocity.y = -speed.y	
+	not(Input.is_action_pressed("move_right")) and not(Input.is_action_pressed("move_left")) and $SoundRun.stop()
+	(Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")) and not(is_on_floor()) and $SoundRun.stop()
+	#((Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")) and is_on_floor()) and $SoundRun.play()
+	
+	if (Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left")) and is_on_floor():
+		$SoundRun.play()
+		
 	if (Input.is_action_pressed("move_right")):
 		$AnimatedSprite.play("run")
 		_velocity.x = speed.x
@@ -28,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		_velocity.x = -speed.x
 	elif (Input.is_action_just_pressed("attack")):
 		$AnimatedSprite.play("attack1")
-		$AnimatedSprite.speed_scale = 3
+		#$AnimatedSprite.speed_scale = 3
 	else:
 		_velocity.x = 0
 		
@@ -56,17 +66,17 @@ func _on_Timer_timeout() -> void:
 	
 
 func _on_AnimatedSprite_animation_finished() -> void:
+	$SwordArea/CollisonSword.disabled = true;
 	$AnimatedSprite.speed_scale = 3
 	if ($AnimatedSprite.animation == "attack1"):
-		$SwordArea/CollisonSword.disabled = true;
 		$AnimatedSprite.play("idle")
 	elif ($AnimatedSprite.animation == "run"):
 		$AnimatedSprite.play("idle")
 	elif ($AnimatedSprite.animation == "jump"):
 		$AnimatedSprite.play("idle")
 	elif ($AnimatedSprite.animation == "death"):
-		GameManager.life_player = max_hp
-		get_tree().change_scene("res://src/UI/GameOver.tscn")
+		$SoundDeath.play()
+		
 	elif ($AnimatedSprite.animation == "hit"):
 		#print('HIT')
 		$AnimatedSprite.play("idle")
@@ -81,15 +91,10 @@ func _on_CollisionEnemy_area_entered(area: Area2D) -> void:
 func _on_AnimatedSprite_frame_changed() -> void:
 	if ($AnimatedSprite.animation == "attack1" and $AnimatedSprite.frame >= 4):
 		$SwordArea/CollisonSword.disabled = false;
-
-
-func _on_SwordArea_body_entered(body: Node) -> void:
-	pass
-	#if body.is_in_group("Enemy"):
-		#body.queue_free()
+		$SoundAttack01.play()
 	
 func take_attack():
-		
+	$SoundHit.play()	
 	GameManager.life_player -= 0.5
 	emit_signal("hp_change", GameManager.life_player)
 	
@@ -109,8 +114,17 @@ func set_hp(new_value):
 	GameManager.life_player = new_value
 	emit_signal("hp_change", new_value)
 	
+func impulse_jump(value):
+	_velocity = Vector2(_velocity.x, -value)
+	
 
 
 
-func _on_CollisionEnemy_area_exited(area):
-	pass # Replace with function body.
+func _on_StompJumpEnemy_area_entered(area: Area2D) -> void:
+	if (area.name == "StompJumpArea"):
+		impulse_jump(impulse)
+
+
+func _on_SoundDeath_finished() -> void:
+	GameManager.life_player = max_hp
+	get_tree().change_scene("res://src/UI/GameOver.tscn")

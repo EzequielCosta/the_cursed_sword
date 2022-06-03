@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/humanYell2.wav-ceb55c1f074e99c7c8d248731fa2175b.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/sound_mosters/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav"
+dest_files=[ "res://.import/humanYell2.wav-ceb55c1f074e99c7c8d248731fa2175b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

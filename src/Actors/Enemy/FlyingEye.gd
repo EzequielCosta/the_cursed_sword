@@ -40,10 +40,18 @@ func _prepare_to_attack():
 
 
 func _on_StompArea_area_entered(area: Area2D) -> void:
-	if (area.name == 'SwordArea'):
-		#print("_on_StompArea_area_entered")
+	print(area.name)
+	if (area.name == "SwordArea"):
 		speed.y += gravity
 		die()
 		
 func die():
+	set_physics_process(false)
+	$StompJumpArea/CollisionShape2D.disabled = true
 	$AnimatedSprite.play("death")
+
+
+
+func _on_StompJumpArea_area_entered(area: Area2D) -> void:
+	if (area.name == "StompJumpEnemy"):
+		die()

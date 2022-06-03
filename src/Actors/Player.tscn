@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/Main Characters/Martial Hero/Sprites/Jump.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://assets/Main Characters/Martial Hero/Sprites/Run.png" type="Texture" id=8]
 [ext_resource path="res://assets/Main Characters/Martial Hero/Sprites/Attack1.png" type="Texture" id=9]
 [ext_resource path="res://assets/Main Characters/Martial Hero/Sprites/Attack2.png" type="Texture" id=10]
+[ext_resource path="res://assets/Sounds/sword - StarNinjas/sword.1.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/Sounds/hit_souds/ogg/hit3.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/Sounds/hit_souds/ogg/die1.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/Sounds/step_sounds/footsteps/boots/0.ogg" type="AudioStream" id=14]
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 7 )
@@ -131,28 +135,20 @@ region = Rect2( 800, 0, 200, 200 )
 atlas = ExtResource( 4 )
 region = Rect2( 1000, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
 region = Rect2( 200, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 3 )
-region = Rect2( 200, 0, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 3 )
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
 region = Rect2( 400, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 3 )
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
 region = Rect2( 600, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=45]
@@ -195,20 +191,28 @@ region = Rect2( 400, 0, 200, 200 )
 atlas = ExtResource( 3 )
 region = Rect2( 600, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
 region = Rect2( 200, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 3 )
+region = Rect2( 200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 3 )
 region = Rect2( 400, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 3 )
 region = Rect2( 600, 0, 200, 200 )
 
 [sub_resource type="SpriteFrames" id=42]
@@ -238,14 +242,9 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ) ],
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
 "loop": true,
-"name": "fall",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
-"loop": true,
-"name": "take_hint_fall",
+"name": "take_hint",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
@@ -258,20 +257,28 @@ animations = [ {
 "name": "hit",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"frames": [ SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
-"name": "take_hint",
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "take_hint_fall",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=43]
-extents = Vector2( 14, 25.5 )
+extents = Vector2( 14, 26 )
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 14.25, 24.75 )
+extents = Vector2( 7.5, 24.25 )
 
 [sub_resource type="RectangleShape2D" id=44]
-extents = Vector2( 33.75, 22.25 )
+extents = Vector2( 39, 22.25 )
+
+[sub_resource type="RectangleShape2D" id=55]
+extents = Vector2( 14.5, 1.5 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 34
@@ -280,10 +287,12 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 42 )
 animation = "idle"
+frame = 7
 speed_scale = 3.0
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -4.5 )
+position = Vector2( 1, -4 )
 shape = SubResource( 43 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -302,24 +311,47 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionEnemy"]
 modulate = Color( 0.0352941, 0, 0.00784314, 1 )
-position = Vector2( 2.75, -2.75 )
+position = Vector2( 0.5, -3.25 )
 shape = SubResource( 15 )
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="SwordArea" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisonSword" type="CollisionShape2D" parent="SwordArea"]
 modulate = Color( 0.0392157, 0.223529, 0.937255, 1 )
-position = Vector2( 60.25, -6.25 )
+position = Vector2( 55, -6.25 )
 shape = SubResource( 44 )
 disabled = true
+
+[node name="StompJumpEnemy" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="StompJumEnemyCollision" type="CollisionShape2D" parent="StompJumpEnemy"]
+position = Vector2( 1, 23.5 )
+shape = SubResource( 55 )
+
+[node name="SoundAttack01" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.333
+
+[node name="SoundHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -22.0
+
+[node name="SoundDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -22.0
+
+[node name="SoundRun" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -22.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="area_entered" from="CollisionEnemy" to="." method="_on_CollisionEnemy_area_entered"]
-[connection signal="area_exited" from="CollisionEnemy" to="." method="_on_CollisionEnemy_area_exited"]
 [connection signal="body_entered" from="CollisionEnemy" to="." method="_on_EnemyDetector_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="SwordArea" to="." method="_on_SwordArea_body_entered"]
+[connection signal="area_entered" from="StompJumpEnemy" to="." method="_on_StompJumpEnemy_area_entered"]
+[connection signal="finished" from="SoundDeath" to="." method="_on_SoundDeath_finished"]

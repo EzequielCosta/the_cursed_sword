@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/7.ogg-7481d16f314975378e15c2f86251e26e.oggstr"
+
+[deps]
+
+source_file="res://assets/Sounds/step_sounds/footsteps/wood/7.ogg"
+dest_files=[ "res://.import/7.ogg-7481d16f314975378e15c2f86251e26e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

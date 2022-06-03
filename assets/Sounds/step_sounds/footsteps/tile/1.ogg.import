@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1.ogg-e6afbc193fc31a0cd24d9ea7d33d16f1.oggstr"
+
+[deps]
+
+source_file="res://assets/Sounds/step_sounds/footsteps/tile/1.ogg"
+dest_files=[ "res://.import/1.ogg-e6afbc193fc31a0cd24d9ea7d33d16f1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

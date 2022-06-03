@@ -5,6 +5,7 @@ var _velocity = Vector2.ZERO
 const FLOOR_NORMAL: = Vector2.UP
 var gravity = 2000
 onready var player : Node2D
+var die = false
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -15,7 +16,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
 	player =  get_parent().get_node("Player")
-	_setDirection()
+	#_setDirection()
+	_direction_move()
 	$AnimatedSprite.flip_h = _velocity.x < 0
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
 	
@@ -50,7 +52,8 @@ func _on_AnimatedSprite_animation_finished() -> void:
 
 func _on_AttackPlayerArea2D_area_entered(area: Area2D) -> void:
 	if (area.name == "SwordArea"):
-		$AnimatedSprite.play("death")
+		die()
+		
 
 
 func _on_SwordArea2D_area_entered(area: Area2D) -> void:
@@ -58,7 +61,7 @@ func _on_SwordArea2D_area_entered(area: Area2D) -> void:
 
 
 func _on_PlayerNearArea2D_area_entered(area: Area2D) -> void:
-	if area.name == 'CollisionEnemy':
+	if area.name == 'CollisionEnemy' and not(die):
 		$AnimatedSprite.play("attack")
 		#$SwordArea2D/SwordCollisionShape2D.disabled = false
 		set_physics_process(false);
@@ -70,22 +73,32 @@ func _on_AnimatedSprite_frame_changed() -> void:
 
 
 func _on_PlayerNearArea2D_area_exited(area: Area2D) -> void:
-	if area.name == 'CollisionEnemy':
+	if area.name == 'CollisionEnemy' and not(die):
 		$AnimatedSprite.play("walk");
 		set_physics_process(true);
 		$SwordArea2D/SwordCollisionShape2D.disabled = true
 		
-func directionOfPlayer():
-	if (player != null):
-		var distance = player.global_position - global_position
-		var direction = distance.normalized()
-		return sign(distance.x)
+func _direction_move():
+	
+	if (player == null):
+		return 
 		
-	return 0
-
-func _setDirection () :
-	if (player != null):		
-		_velocity.x =  abs(_velocity.x) * directionOfPlayer()
-		$SwordArea2D/SwordCollisionShape2D.position.x = abs($SwordArea2D/SwordCollisionShape2D.position.x) * directionOfPlayer()
-		$PlayerNearArea2D/PlayerNearCollisionShape2D.position.x = abs($PlayerNearArea2D/PlayerNearCollisionShape2D.position.x) * directionOfPlayer()
+	var distance = player.global_position - global_position
+	var direction = distance.normalized()
+	
+	if (abs(distance.x) <= 30):
+		$AnimatedSprite.play("idle")
+		_velocity.x = 0
+	else:
+		$AnimatedSprite.play("walk")
+		_velocity.x = speed.x * sign(distance.x)
+		$SwordArea2D/SwordCollisionShape2D.position.x = abs($SwordArea2D/SwordCollisionShape2D.position.x) * sign(distance.x)
+		$PlayerNearArea2D/PlayerNearCollisionShape2D.position.x = abs($PlayerNearArea2D/PlayerNearCollisionShape2D.position.x) * sign(distance.x)
+		$CollisionShape2D.position.x = abs($CollisionShape2D.position.x) * sign(distance.x)
+		$AttackPlayerArea2D/AttackPlayerCollision.position.x = abs($AttackPlayerArea2D/AttackPlayerCollision.position.x) * sign(distance.x)
+		
+func die():
+	die = true
+	set_physics_process(false)
+	$AnimatedSprite.play("death")
 
