@@ -24,7 +24,7 @@ func _on_AreaPlayer_body_entered(body: Node) -> void:
 		#emit_signal("get_item")
 		
 func _add_life() -> void:
-	if GameManager.fruits == 4 and GameManager.life_player != 4:
+	if GameManager.fruits == 5 and GameManager.life_player != 4:
 		GameManager.life_player += 0.5
 		GameManager.fruits = 0
 		

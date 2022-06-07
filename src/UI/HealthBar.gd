@@ -24,7 +24,7 @@ func _update_health_bar(new_value: int) -> void:
 	__ = tween.start()
 
 func _physics_process(delta: float) -> void:
-	if (GameManager.fruits == 10):
+	if (GameManager.fruits == 5):
 		GameManager.life_player += 0.5
 		GameManager.fruits = 0
 		var new_health = int( 100 - MIN_HEALTH) * float(GameManager.life_player / max_hp) + MIN_HEALTH

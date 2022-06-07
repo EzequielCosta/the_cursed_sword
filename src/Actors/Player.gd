@@ -14,7 +14,8 @@ const FLOOR_NORMAL: = Vector2.UP
 
 func _physics_process(delta: float) -> void:
 	
-	check_if_die()
+	if _die:
+		return
 	
 	_velocity.y += gravity * delta
 	
@@ -75,14 +76,10 @@ func _on_AnimatedSprite_animation_finished() -> void:
 	elif ($AnimatedSprite.animation == "jump"):
 		$AnimatedSprite.play("idle")
 	elif ($AnimatedSprite.animation == "death"):
-		#$SoundDeath.play()
-		#yield($SoundDeath,"finished")
 		GameManager.life_player = max_hp
 		queue_free()
 		get_tree().change_scene("res://src/UI/GameOver.tscn")
-		
 	elif ($AnimatedSprite.animation == "hit"):
-		#print('HIT')
 		$AnimatedSprite.play("idle")
 	
 
@@ -98,11 +95,17 @@ func _on_AnimatedSprite_frame_changed() -> void:
 		$SoundAttack01.play()
 	
 func take_attack( damage_value: int = 0.5):
-	$SoundHit.play()	
+	
+	if _die:
+		return
+		
 	GameManager.life_player -= damage_value
 	emit_signal("hp_change", GameManager.life_player)
 	
+	if check_if_die():
+		return
 		
+	$SoundHit.play()	
 	$AnimatedSprite.play("hit")
 	set_physics_process(false)
 	$Timer.start(0.1)
@@ -118,6 +121,7 @@ func check_if_die():
 func die():
 	set_physics_process(false)
 	$CollisionEnemy/CollisionShape2D.disabled = true
+	$CollisionShape2D.disabled = true
 	$AnimatedSprite.speed_scale = 2
 	$SoundDeath.play()
 	$AnimatedSprite.play("death")
@@ -138,7 +142,6 @@ func _on_StompJumpEnemy_area_entered(area: Area2D) -> void:
 
 
 func _on_SoundDeath_finished() -> void:
-	print("ola")
 	pass
 	"""
 	GameManager.life_player = max_hp

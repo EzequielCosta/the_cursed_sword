@@ -19,5 +19,8 @@ func _ready() -> void:
 func _on_Boss_turn_night(night) -> void:
 	if (night):
 		$AnimationPlayer.play("turn_night")
+		$AudioStreamPlayer2D.stop()
+		$AudioBoss.play()
+		$Boss/VisibilityEnabler2D.queue_free()
 	#else:
 		#$AnimationPlayer.play_backwards("turn_night")

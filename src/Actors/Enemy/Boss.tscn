@@ -316,6 +316,8 @@ shape = SubResource( 54 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 3.5, 33 )
+scale = Vector2( 7.05, 7.5 )
 process_parent = true
 physics_process_parent = true
 
