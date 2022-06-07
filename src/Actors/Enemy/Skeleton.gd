@@ -24,21 +24,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_PlayerNearArea2D_body_entered(body: Node) -> void:
 	pass
-	"""
-	print(body.name)
-	if (body.name == "Player"):
-		$AnimatedSprite.play("attack")
-		#$SwordArea2D/SwordCollisionShape2D.modulate = "#fff"
-		$SwordArea2D/SwordCollisionShape2D.disabled = false
-		#if ($DetectorPlayer.is_colliding()):
-			#print("Colide com areas " + $DetectorPlayer.collide_with_areas);
-		set_physics_process(false);
-	"""
-		
 		
 
 func _on_SwordArea2D_body_entered(body: Node) -> void:
-	if (body.name == "Player"):
+	if (body.name == "Player" and not(body.get_die())):
 		body.take_attack()
 	
 

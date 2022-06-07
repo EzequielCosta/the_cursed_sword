@@ -1,0 +1,136 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/fonts/Abaddon Light.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Abaddon Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/UI/DialogBox.gd" type="Script" id=3]
+[ext_resource path="res://assets/Main Characters/Martial Hero/Sprites/Idle.png" type="Texture" id=4]
+[ext_resource path="res://assets/Enemies/Goblin/Idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/arrow_cursor.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 21
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 8 )
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 987, 567 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "up_down"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 987, 567 ), Vector2( 987, 569 ) ]
+}
+
+[node name="DialogBox" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitPrimary" type="Sprite" parent="."]
+visible = false
+position = Vector2( 98, 254 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+hframes = 8
+
+[node name="PortraitSecondary" type="Sprite" parent="."]
+visible = false
+position = Vector2( 909, 163 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 5 )
+flip_h = true
+hframes = 4
+
+[node name="Dialog" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -495.0
+margin_top = -24.0
+margin_right = 492.0
+margin_bottom = 280.0
+color = Color( 0.12549, 0.0980392, 0.0980392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="RichTextLabel" parent="Dialog"]
+margin_left = 33.0
+margin_top = 11.0
+margin_right = 205.0
+margin_bottom = 53.0
+theme = SubResource( 9 )
+text = "Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Dialog"]
+margin_left = 47.0
+margin_top = 67.0
+margin_right = 425.0
+margin_bottom = 107.0
+theme = SubResource( 10 )
+bbcode_enabled = true
+bbcode_text = "Voce venceu! A Espada foi devolvida!"
+text = "Voce venceu! A Espada foi devolvida!"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 987, 567 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "up_down"
+anims/RESET = SubResource( 11 )
+anims/up_down = SubResource( 12 )

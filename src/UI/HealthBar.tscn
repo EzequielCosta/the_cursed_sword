@@ -5,6 +5,8 @@
 [ext_resource path="res://src/UI/HealthBar.gd" type="Script" id=3]
 
 [node name="HealthBar" type="CanvasLayer"]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 script = ExtResource( 3 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]

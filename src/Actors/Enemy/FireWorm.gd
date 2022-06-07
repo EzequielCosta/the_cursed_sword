@@ -4,6 +4,7 @@ var speed: = Vector2(25.0, 0)
 var _velocity = Vector2.ZERO
 const FLOOR_NORMAL: = Vector2.UP
 var gravity = 2000
+var die = false
 
 const SHOOT = preload("res://src/Objects/ShootFireWorm.tscn")
 
@@ -32,7 +33,7 @@ func _on_AnimatedSprite_animation_finished() -> void:
 
 
 func _on_AnimatedSprite_frame_changed() -> void:
-	if $AnimatedSprite.animation == "attack" and $AnimatedSprite.frame == 11:
+	if $AnimatedSprite.animation == "attack" and $AnimatedSprite.frame == 11 and not(die):
 		_createFireBall()
 		
 func _createFireBall() -> void :
@@ -49,7 +50,9 @@ func _on_StompArea2D_area_entered(area: Area2D) -> void:
 		
 func die():
 	$AnimatedSprite.play("death")
+	die = true
 
 
 func _on_VisibilityEnabler2D_screen_entered() -> void:
-	$TimerShoot.start(4)
+	if (not(die)):
+		$TimerShoot.start(4)

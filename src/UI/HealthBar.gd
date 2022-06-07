@@ -8,7 +8,8 @@ onready var tween = $TextureProgress/Tween
 onready var health_bar = get_node("TextureProgress")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_update_health_bar(100)
+	var health = int( 100 - MIN_HEALTH) * float(GameManager.life_player / max_hp) + MIN_HEALTH
+	_update_health_bar(health)
 
 func _update_health_bar(new_value: int) -> void:
 	var __ = tween.interpolate_property(
