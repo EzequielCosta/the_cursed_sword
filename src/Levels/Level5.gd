@@ -24,3 +24,16 @@ func _on_Boss_turn_night(night) -> void:
 		$Boss/VisibilityEnabler2D.queue_free()
 	#else:
 		#$AnimationPlayer.play_backwards("turn_night")
+
+
+func _on_Boss_die() -> void:
+	$DialogLayer/DialogBox.visible = true
+	$DialogLayer/DialogBox.start()
+
+
+func _on_DialogBox_done_read(value) -> void:
+	$Transition.transition_in()
+
+
+func _on_Transition_transitioned() -> void:
+	get_tree().change_scene("res://src/UI/Win.tscn")

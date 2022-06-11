@@ -19,4 +19,9 @@ func _ready() -> void:
 func _on_Map_body_entered(body: Node) -> void:
 	if (body.name == "Player"):
 		GameManager.level += 1;
-		get_tree().change_scene("res://src/Levels/Level"+str(GameManager.level)+".tscn");
+		$Transition.transition_in()
+		
+
+
+func _on_Transition_transitioned() -> void:
+	get_tree().change_scene("res://src/Levels/Level"+str(GameManager.level)+".tscn");

@@ -20,7 +20,7 @@ func _on_DialogBox_done_read(value) -> void:
 		return
 		
 	if endStory:
-		get_tree().change_scene("res://src/Levels/Main.tscn")
+		$Transition.transition_in()
 		return
 		
 	$Player.set_physics_process(true)
@@ -37,3 +37,7 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		$DialogLayer/DialogBox.dialogPath = "res://src/Dialogs/dialog-start-enemy.json"
 		$DialogLayer/DialogBox.visible = true
 		$DialogLayer/DialogBox.start()
+
+
+func _on_Transition_transitioned() -> void:
+	get_tree().change_scene("res://src/Levels/Level1.tscn")

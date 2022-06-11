@@ -5,3 +5,8 @@ func _ready() -> void:
 
 func _on_Button_pressed() -> void:
 	get_tree().change_scene("res://src/UI/Story.tscn")
+
+func _on_ButtonHelp_pressed() -> void:
+	get_tree().change_scene("res://src/UI/Controls.tscn")
+
+

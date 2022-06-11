@@ -10,6 +10,7 @@ onready var player : Node2D
 var distance_old_player;
 signal hp_change(new_value)
 signal turn_night(night)
+signal die()
 
 #const SHOOT = preload("res://src/Objects/BombShoot.tscn")
 const SHOOT = preload("res://src/Objects/BombGoblin.tscn")
@@ -41,7 +42,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_TimerBomb_timeout() -> void:
-	print("Throw bomb")
 	set_physics_process(false)
 	$AnimatedSprite.play("attack1")
 	
@@ -68,8 +68,9 @@ func _on_AnimatedSprite_animation_finished() -> void:
 		
 	
 	elif ($AnimatedSprite.animation == "death"):
-		print("death")
+		emit_signal("die")
 		queue_free()
+		
 	elif ($AnimatedSprite.animation == "hit"):
 		$AnimatedSprite.play("idle")
 		$AnimatedSprite.frame = 2

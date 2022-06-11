@@ -11,21 +11,14 @@ var phraseNum = 0
 var finished = false
 
 func _ready():
-	pass
-	"""
-	$Timer.wait_time = textSpeed
-	dialog = getDialog()
-	assert(dialog, "Dialog not found")
-	nextPhrase()
-	"""
+	set_process(false)
  
 func _process(_delta):
-	#$Indicator.visible = finished
 	if Input.is_action_just_pressed("ui_accept"):
 		if finished:
 			nextPhrase()
 		else:
-			$Text.visible_characters = len($Text.text)
+			$Dialog/Text.visible_characters = len($Dialog/Text.text)
 			visible = true
 
 
@@ -48,6 +41,7 @@ func getDialog() -> Array:
 func nextPhrase() -> void:
 	if phraseNum >= len(dialog):
 		emit_signal("done_read",true)
+		set_process(false)
 		visible = false
 		return
 	
@@ -63,7 +57,7 @@ func nextPhrase() -> void:
 	if dialog[phraseNum]["Name"] == "Player":
 		$PortraitPrimary.visible = true
 		$PortraitSecondary.visible = false
-	elif dialog[phraseNum]["Name"] == "Boss":
+	elif dialog[phraseNum]["Name"] == "Grande Goblin":
 		$PortraitPrimary.visible = false
 		$PortraitSecondary.visible = true
 	
@@ -78,6 +72,7 @@ func nextPhrase() -> void:
 	return
 	
 func start():
+	set_process(true)
 	$Timer.wait_time = textSpeed
 	dialog = getDialog()
 	assert(dialog, "Dialog not found")

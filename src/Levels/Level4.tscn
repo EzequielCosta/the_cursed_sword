@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-mountains.png" type="Texture" id=1]
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-montain-far.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/UI/HealthBar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/Sounds/fight.wav" type="AudioStream" id=15]
 [ext_resource path="res://src/UI/CountItem.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/UI/Level.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -249,6 +250,8 @@ tile_data = PoolIntArray( 194, 4, 0, 65730, 4, 0, 131106, 3, 0, 131110, 3, 0, 13
 
 [node name="CountItem" parent="CanvasLayer" instance=ExtResource( 16 )]
 
+[node name="Level" parent="CanvasLayer" instance=ExtResource( 17 )]
+
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 41, 517 )
 
@@ -382,5 +385,110 @@ impulse_player = 1288.0
 stream = ExtResource( 15 )
 volume_db = -38.737
 autoplay = true
+
+[node name="Fruit20" parent="." instance=ExtResource( 11 )]
+position = Vector2( 146, 516 )
+
+[node name="Fruit21" parent="." instance=ExtResource( 11 )]
+position = Vector2( 210, 480 )
+
+[node name="Fruit22" parent="." instance=ExtResource( 11 )]
+position = Vector2( 274, 457 )
+
+[node name="Fruit23" parent="." instance=ExtResource( 11 )]
+position = Vector2( 337, 423 )
+
+[node name="Fruit24" parent="." instance=ExtResource( 11 )]
+position = Vector2( 404, 389 )
+
+[node name="Fruit25" parent="." instance=ExtResource( 11 )]
+position = Vector2( 467, 353 )
+
+[node name="Fruit26" parent="." instance=ExtResource( 11 )]
+position = Vector2( 527, 318 )
+
+[node name="Fruit27" parent="." instance=ExtResource( 11 )]
+position = Vector2( 591, 286 )
+
+[node name="Fruit28" parent="." instance=ExtResource( 11 )]
+position = Vector2( 726, 228 )
+
+[node name="Fruit29" parent="." instance=ExtResource( 11 )]
+position = Vector2( 784, 193 )
+
+[node name="Fruit30" parent="." instance=ExtResource( 11 )]
+position = Vector2( 850, 80 )
+
+[node name="Fruit31" parent="." instance=ExtResource( 11 )]
+position = Vector2( 913, 102 )
+
+[node name="Fruit32" parent="." instance=ExtResource( 11 )]
+position = Vector2( 978, 73 )
+
+[node name="Fruit33" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1039, 59 )
+
+[node name="Fruit34" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1167, 41 )
+
+[node name="Fruit35" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1299, 77 )
+
+[node name="Fruit36" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1457, 95 )
+
+[node name="Fruit37" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1518, 55 )
+
+[node name="Fruit38" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1681, 270 )
+
+[node name="Fruit39" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1879, 274 )
+
+[node name="Fruit40" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2126, 172 )
+
+[node name="Fruit41" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2400, 221 )
+
+[node name="Fruit42" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2572, 213 )
+
+[node name="Fruit43" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2897, 137 )
+
+[node name="Fruit44" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2835, 207 )
+
+[node name="Fruit45" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2956, 39 )
+
+[node name="Fruit46" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3026, 52 )
+
+[node name="Fruit47" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3219, 33 )
+
+[node name="Fruit48" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3342, 184 )
+
+[node name="Fruit49" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3727, 218 )
+
+[node name="Fruit50" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3727, 218 )
+
+[node name="Fruit51" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3995, 226 )
+
+[node name="Fruit52" parent="." instance=ExtResource( 11 )]
+position = Vector2( 4529, 294 )
+
+[node name="Fruit53" parent="." instance=ExtResource( 11 )]
+position = Vector2( 4799, 500 )
+
+[node name="Fruit54" parent="." instance=ExtResource( 11 )]
+position = Vector2( 4756, 402 )
 
 [connection signal="hp_change" from="Player" to="CanvasLayer/HealthBar" method="_on_Player_hp_change"]

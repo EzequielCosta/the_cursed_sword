@@ -215,4 +215,15 @@ custom_constants/hseparation = 0
 text = "START"
 clip_text = true
 
+[node name="ButtonHelp" type="Button" parent="VBoxContainer"]
+margin_top = 139.0
+margin_right = 413.0
+margin_bottom = 179.0
+rect_min_size = Vector2( 0, 40 )
+theme = SubResource( 4 )
+custom_constants/hseparation = 0
+text = "HELP"
+clip_text = true
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonHelp" to="." method="_on_ButtonHelp_pressed"]

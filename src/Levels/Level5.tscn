@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=2]
@@ -15,11 +15,14 @@
 [ext_resource path="res://src/Levels/Level5.gd" type="Script" id=13]
 [ext_resource path="res://src/Actors/Enemy/Goblin.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Actors/Enemy/FireWorm.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Actors/Enemy/Bomb.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Actors/Enemy/BombRigidBody2D.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Objects/Fruit.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/Sounds/fight.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/Sounds/Orbital Colossus.mp3" type="AudioStream" id=19]
 [ext_resource path="res://src/UI/CountItem.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/UI/Level.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/UI/DialogBox.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/UI/Transition.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -358,7 +361,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 32
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0, 852018, 0, 0, 852019, 0, 0, 852020, 0, 0, 852033, 0, 0, 852034, 0, 0, 852035, 0, 0, 852036, 0, 0, 852037, 0, 0, 852038, 0, 0, 852050, 0, 0, 852051, 0, 0, 852052, 0, 0, 852053, 0, 0, 852054, 0, 0, 852055, 0, 0, 852056, 0, 0, 852119, 0, 0, 852120, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917522, 0, 0, 917523, 0, 0, 917556, 0, 0, 917557, 0, 0, 917558, 0, 0, 917603, 0, 0, 917604, 0, 0, 917605, 0, 0, 917606, 0, 0, 917607, 0, 0, 917608, 0, 0, 917626, 0, 0, 917627, 0, 0, 917628, 0, 0, 917629, 0, 0, 917630, 0, 0, 917631, 0, 0, 917654, 0, 0, 917655, 0, 0, 917665, 0, 0, 917666, 0, 0, 917667, 0, 0, 917679, 0, 0, 917680, 0, 0, 917681, 0, 0, 917682, 0, 0, 917683, 0, 0, 917733, 0, 0, 917734, 0, 0, 917735, 0, 0, 917736, 0, 0, 917737, 0, 0, 917738, 0, 0, 917753, 0, 0, 917754, 0, 0, 917755, 0, 0, 917756, 0, 0, 917757, 0, 0, 917758, 0, 0, 983073, 0, 0, 983074, 0, 0, 983075, 0, 0, 983076, 0, 0, 983077, 0, 0, 983078, 0, 0, 983187, 0, 0, 983188, 0, 0, 983189, 0, 0, 983190, 0, 0, 983242, 0, 0, 983243, 0, 0, 983244, 0, 0, 983245, 0, 0, 983246, 0, 0 )
+tile_data = PoolIntArray( 589979, 0, 0, 589980, 0, 0, 589981, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0, 852018, 0, 0, 852019, 0, 0, 852020, 0, 0, 852119, 0, 0, 852120, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917522, 0, 0, 917523, 0, 0, 917556, 0, 0, 917557, 0, 0, 917558, 0, 0, 917569, 0, 0, 917570, 0, 0, 917571, 0, 0, 917572, 0, 0, 917573, 0, 0, 917574, 0, 0, 917586, 0, 0, 917587, 0, 0, 917588, 0, 0, 917589, 0, 0, 917590, 0, 0, 917591, 0, 0, 917603, 0, 0, 917604, 0, 0, 917605, 0, 0, 917606, 0, 0, 917607, 0, 0, 917608, 0, 0, 917626, 0, 0, 917627, 0, 0, 917628, 0, 0, 917629, 0, 0, 917630, 0, 0, 917631, 0, 0, 917640, 0, 0, 917654, 0, 0, 917655, 0, 0, 917665, 0, 0, 917666, 0, 0, 917667, 0, 0, 917679, 0, 0, 917680, 0, 0, 917681, 0, 0, 917682, 0, 0, 917683, 0, 0, 983073, 0, 0, 983074, 0, 0, 983075, 0, 0, 983076, 0, 0, 983077, 0, 0, 983078, 0, 0, 983154, 0, 0, 983187, 0, 0, 983188, 0, 0, 983189, 0, 0, 983190, 0, 0, 983242, 0, 0, 983243, 0, 0, 983244, 0, 0, 983245, 0, 0, 983246, 0, 0, 983267, 0, 0, 983271, 0, 0, 983289, 0, 0, 983290, 0, 0, 983291, 0, 0, 983292, 0, 0, 983293, 0, 0, 1048690, 0, 0, 1048691, 0, 0, 1114226, 0, 0, 1114227, 0, 0 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
@@ -378,19 +381,25 @@ frame = 1
 [node name="Camera2D" parent="Player" index="2"]
 position = Vector2( 22, -333 )
 
+[node name="DialogLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogBox" parent="DialogLayer" instance=ExtResource( 22 )]
+visible = false
+dialogPath = "res://src/Dialogs/dialog-end.json"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 10 )]
 
 [node name="CountItem" parent="CanvasLayer" instance=ExtResource( 20 )]
 
+[node name="Level" parent="CanvasLayer" instance=ExtResource( 21 )]
+
 [node name="Boss" parent="." instance=ExtResource( 11 )]
 position = Vector2( 8659, 420 )
 
-[node name="AnimatedSprite" parent="Boss" index="1"]
+[node name="AnimatedSprite" parent="Boss" index="2"]
 frame = 3
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Skeleton" parent="." instance=ExtResource( 12 )]
 position = Vector2( 463, 547 )
@@ -420,14 +429,14 @@ position = Vector2( 2172, 396 )
 [node name="Goblin3" parent="." instance=ExtResource( 14 )]
 position = Vector2( 2738, 390 )
 
-[node name="BombEnemy" parent="." instance=ExtResource( 16 )]
-position = Vector2( 3734, 78 )
+[node name="BombRigidBody2D" parent="." instance=ExtResource( 16 )]
+position = Vector2( 3752, 84 )
 
-[node name="BombEnemy2" parent="." instance=ExtResource( 16 )]
-position = Vector2( 4363, 84 )
+[node name="BombRigidBody2D2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 4770, 84 )
 
-[node name="BombEnemy3" parent="." instance=ExtResource( 16 )]
-position = Vector2( 4878, 78 )
+[node name="BombRigidBody2D3" parent="." instance=ExtResource( 16 )]
+position = Vector2( 4306, 84 )
 
 [node name="Skeleton4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 4626, 504 )
@@ -582,6 +591,48 @@ position = Vector2( 3588, 450 )
 [node name="Fruit44" parent="." instance=ExtResource( 17 )]
 position = Vector2( 3588, 530 )
 
+[node name="Fruit50" parent="." instance=ExtResource( 17 )]
+position = Vector2( 4787, 407 )
+
+[node name="Fruit51" parent="." instance=ExtResource( 17 )]
+position = Vector2( 4859, 384 )
+
+[node name="Fruit53" parent="." instance=ExtResource( 17 )]
+position = Vector2( 5732, 418 )
+
+[node name="Fruit54" parent="." instance=ExtResource( 17 )]
+position = Vector2( 5629, 420 )
+
+[node name="Fruit56" parent="." instance=ExtResource( 17 )]
+position = Vector2( 6545, 445 )
+
+[node name="Fruit57" parent="." instance=ExtResource( 17 )]
+position = Vector2( 6597, 442 )
+
+[node name="Fruit59" parent="." instance=ExtResource( 17 )]
+position = Vector2( 7407, 440 )
+
+[node name="Fruit63" parent="." instance=ExtResource( 17 )]
+position = Vector2( 8045, 440 )
+
+[node name="Fruit61" parent="." instance=ExtResource( 17 )]
+position = Vector2( 8101, 440 )
+
+[node name="Fruit62" parent="." instance=ExtResource( 17 )]
+position = Vector2( 7988, 442 )
+
+[node name="Fruit60" parent="." instance=ExtResource( 17 )]
+position = Vector2( 7277, 438 )
+
+[node name="Fruit58" parent="." instance=ExtResource( 17 )]
+position = Vector2( 6493, 445 )
+
+[node name="Fruit55" parent="." instance=ExtResource( 17 )]
+position = Vector2( 5005, 256 )
+
+[node name="Fruit52" parent="." instance=ExtResource( 17 )]
+position = Vector2( 4735, 447 )
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 volume_db = -38.737
@@ -591,8 +642,13 @@ autoplay = true
 stream = ExtResource( 19 )
 volume_db = -22.0
 
+[node name="Transition" parent="." instance=ExtResource( 23 )]
+
 [connection signal="hp_change" from="Player" to="CanvasLayer/HealthBar" method="_on_Player_hp_change"]
+[connection signal="done_read" from="DialogLayer/DialogBox" to="." method="_on_DialogBox_done_read"]
+[connection signal="die" from="Boss" to="." method="_on_Boss_die"]
 [connection signal="turn_night" from="Boss" to="." method="_on_Boss_turn_night"]
+[connection signal="transitioned" from="Transition" to="." method="_on_Transition_transitioned"]
 
 [editable path="Player"]
 [editable path="Boss"]
