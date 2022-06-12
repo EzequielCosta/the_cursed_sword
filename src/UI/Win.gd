@@ -17,16 +17,9 @@ func _ready() -> void:
 
 
 func _on_ButtonRestart_pressed() -> void:
-	$TransitionRestart.transition_in()
-
-
-func _on_ButtonExit_pressed() -> void:
-	$TransitionExit.transition_in()
-
-
-func _on_Transition_transitioned() -> void:
 	get_tree().change_scene("res://src/UI/MainMenu.tscn")
 
 
-func _on_TransitionExit_transitioned() -> void:
+func _on_ButtonExit_pressed() -> void:
 	get_tree().quit()
+

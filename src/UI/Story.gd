@@ -27,9 +27,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		$Sword/AnimationPlayer.play("get_sword")
 		yield($Sword/AnimationPlayer,"animation_finished")
 		endStory = true
-		$DialogLayer/DialogBox.dialogPath = "res://src/Dialogs/dialog-start-enemy.json"
+		#$DialogLayer/DialogBox.dialogPath = "res://src/Dialogs/dialog-start-enemy.json"
 		$DialogLayer/DialogBox.visible = true
-		$DialogLayer/DialogBox.start()
+		$DialogLayer/DialogBox.start("dialog_start_enemy")
 
 
 func _on_Transition_transitioned() -> void:
@@ -41,4 +41,4 @@ func _on_PlayerStory_stop_run(stop) -> void:
 		$Timer.start(1)
 		yield($Timer,"timeout")
 		$DialogLayer/DialogBox.visible = true
-		$DialogLayer/DialogBox.start()
+		$DialogLayer/DialogBox.start("dialog_start")

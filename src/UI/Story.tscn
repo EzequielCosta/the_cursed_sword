@@ -404,6 +404,7 @@ tile_data = PoolIntArray( 262132, 4, 0, 327668, 4, 0, 393204, 4, 0, 327830, 2, 0
 
 [node name="DialogBox" parent="DialogLayer" instance=ExtResource( 11 )]
 visible = false
+dialog_name = "dialog_start"
 
 [node name="PlayerStory" parent="." instance=ExtResource( 6 )]
 position = Vector2( 20, 554 )

@@ -1,7 +1,6 @@
 extends Control
 
-
-export var dialogPath = "res://src/Dialogs/dialog-start.json"
+export var dialog_name:String = "";
 export(float) var textSpeed = 0.05
 signal done_read(value)
 
@@ -9,6 +8,9 @@ var dialog
  
 var phraseNum = 0
 var finished = false
+
+var _dialogsJson = load("res://src/Dialogs/dialogs.gd").new()
+
 
 func _ready():
 	set_process(false)
@@ -24,6 +26,7 @@ func _process(_delta):
 
 func getDialog() -> Array:
 	
+	"""
 	var f = File.new()
 	assert(f.file_exists(dialogPath), "File path does not exist")
 	
@@ -31,6 +34,8 @@ func getDialog() -> Array:
 	var json = f.get_as_text()
 	
 	var output = parse_json(json)
+	"""
+	var output = _dialogsJson.dialogs[dialog_name]
 	
 	if typeof(output) == TYPE_ARRAY:
 		return output
@@ -71,7 +76,8 @@ func nextPhrase() -> void:
 	phraseNum += 1
 	return
 	
-func start():
+func start(dialog_key : String):
+	dialog_name = dialog_key
 	set_process(true)
 	$Timer.wait_time = textSpeed
 	dialog = getDialog()

@@ -385,7 +385,6 @@ position = Vector2( 22, -333 )
 
 [node name="DialogBox" parent="DialogLayer" instance=ExtResource( 22 )]
 visible = false
-dialogPath = "res://src/Dialogs/dialog-end.json"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
