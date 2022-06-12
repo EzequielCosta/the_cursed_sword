@@ -1,7 +1,7 @@
 extends Control
 
 
-export var dialogPath = ""#res://src/Dialogs/dialog-end.json"
+export var dialogPath = "res://src/Dialogs/dialog-start.json"
 export(float) var textSpeed = 0.05
 signal done_read(value)
 

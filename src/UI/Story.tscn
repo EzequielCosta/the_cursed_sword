@@ -1,18 +1,17 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-mountains.png" type="Texture" id=2]
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-montain-far.png" type="Texture" id=3]
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-trees.png" type="Texture" id=4]
 [ext_resource path="res://assets/parallax_mountain_pack/layers/parallax-mountain-foreground-trees.png" type="Texture" id=5]
-[ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Actors/PlayerStory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sword.png" type="Texture" id=7]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=8]
 [ext_resource path="res://assets/Rock_Tile_Map.png" type="Texture" id=9]
 [ext_resource path="res://assets/Dungeon Tiles #1 32x32.png" type="Texture" id=10]
 [ext_resource path="res://src/UI/DialogBox.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Story.gd" type="Script" id=12]
-[ext_resource path="res://src/Scripts/PlayerStoryBeging.gd" type="Script" id=13]
 [ext_resource path="res://assets/Sounds/07 high in the mountains.ogg" type="AudioStream" id=14]
 [ext_resource path="res://src/UI/Transition.tscn" type="PackedScene" id=15]
 
@@ -405,13 +404,14 @@ tile_data = PoolIntArray( 262132, 4, 0, 327668, 4, 0, 393204, 4, 0, 327830, 2, 0
 
 [node name="DialogBox" parent="DialogLayer" instance=ExtResource( 11 )]
 visible = false
-dialogPath = "res://src/Dialogs/dialog-start.json"
 
-[node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 55, 547 )
-script = ExtResource( 13 )
+[node name="PlayerStory" parent="." instance=ExtResource( 6 )]
+position = Vector2( 20, 554 )
 
-[node name="TimerPlayer" type="Timer" parent="Player"]
+[node name="Camera2D" parent="PlayerStory" index="2"]
+position = Vector2( 163, -318 )
+
+[node name="TimerPlayer" type="Timer" parent="PlayerStory"]
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -444,7 +444,9 @@ autoplay = true
 [node name="Transition" parent="." instance=ExtResource( 15 )]
 
 [connection signal="done_read" from="DialogLayer/DialogBox" to="." method="_on_DialogBox_done_read"]
-[connection signal="stop_run" from="Player" to="." method="_on_Player_stop_run"]
-[connection signal="timeout" from="Player/TimerPlayer" to="Player" method="_on_TimerPlayer_timeout"]
+[connection signal="stop_run" from="PlayerStory" to="." method="_on_PlayerStory_stop_run"]
+[connection signal="timeout" from="PlayerStory/TimerPlayer" to="PlayerStory" method="_on_TimerPlayer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="transitioned" from="Transition" to="." method="_on_Transition_transitioned"]
+
+[editable path="PlayerStory"]

@@ -19,18 +19,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	_velocity.y += gravity * delta
 	$AnimatedSprite.play("run")
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
-	"""
-	var calculate_distance = abs(global_position.x - position_initial.x)
-	if calculate_distance < distance:
-		$AnimatedSprite.play("run")
-		_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
-	else:
-		$AnimatedSprite.play("idle")
-		emit_signal("stop_run", true)
-		set_physics_process(false)
-	"""
+	
 
 func run( time_run_in_sec: int):
 	set_physics_process(true)

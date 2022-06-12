@@ -22,10 +22,6 @@ func _physics_process(delta: float) -> void:
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
 	
 
-func _on_PlayerNearArea2D_body_entered(body: Node) -> void:
-	pass
-		
-
 func _on_SwordArea2D_body_entered(body: Node) -> void:
 	if (body.name == "Player" and not(body.get_die())):
 		body.take_attack()
@@ -43,11 +39,6 @@ func _on_AttackPlayerArea2D_area_entered(area: Area2D) -> void:
 	if (area.name == "SwordArea"):
 		die()
 		
-
-
-func _on_SwordArea2D_area_entered(area: Area2D) -> void:
-	pass
-
 
 func _on_PlayerNearArea2D_area_entered(area: Area2D) -> void:
 	if area.name == 'CollisionEnemy' and not(die):
